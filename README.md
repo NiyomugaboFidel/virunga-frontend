@@ -19,7 +19,7 @@
 1. Clone the repository:
 
     ```bash
-    git clone[https://github.com/NiyomugaboFidel/virunga-frontend](https://github.com/NiyomugaboFidel/virunga-frontend)
+    git clone https://github.com/your-username/movie-application.git
     ```
 
 2. Navigate to the project directory:
