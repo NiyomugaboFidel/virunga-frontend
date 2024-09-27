@@ -15,20 +15,28 @@ export const DarkModeContext = createContext<DarkModeContextProps>({
   toggleDarkMode: () => {},
 });
 
-export const useDarkMode =  () => {
-    return useContext(DarkModeContext)
-}
+export const useDarkMode = () => {
+  return useContext(DarkModeContext);
+};
 
 const DarkModeProvider: React.FC<DarkModeProviderProps> = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  // Get the initial theme from localStorage or default to light mode
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme");
+      return savedTheme === "dark";
+    }
+    return false; // default to false (light mode)
+  });
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      setIsDarkMode(true);
+    // Apply dark mode class based on the initial state
+    if (isDarkMode) {
       document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
     }
-  }, []);
+  }, [isDarkMode]);
 
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;

@@ -7,11 +7,14 @@ import svg from "@/app/data/svgIcon";
 import { useDarkMode } from "@/app/context/DarkModeContext";
 import { navrouter } from "@/app/data/Constant";
 import Link from "next/link";
+import NavItem from "../molecules/NavItem";
+
 
 const Header: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const [isNavOpen, setNavOpen ] = useState(false);
+  const [categoryisOpen, setCategoryIsOpen ] = useState(true);
 
   // search input values
   console.log(searchValue);
@@ -61,18 +64,20 @@ const Header: React.FC = () => {
         </div>
       </div>
       <nav className="hidden lg:flex w-full py-0 bg-primaryColor-light text-textColor-light">
-        <div className="w-full flex justify-between items-center">
+        <div className="w-full flex justify-between items-end">
           <div className="flex justify-center items-center">
-            <button className="w-full rounded-t-[8px] pl-[24px] pr-[16px] bg-Gary-700 flex justify-between items-center gap-[10px] ">
+            <button className=" relative min-w-[306px] w-full rounded-t-[8px] pl-[24px] pr-[16px] bg-Gary-700 flex justify-between items-center gap-[10px] ">
               <div className="flex items-center justify-center">
                 <span className="w-full">
                   <Icon iconName="window.svg" className="w-[18px] h-[18px] " />
                 </span>
                 <span>Categories</span>
+             
               </div>
-              <span>
+              <span onClick={()=> setCategoryIsOpen(prev => !prev)} >
                 <Icon iconTag={svg.dropdown} className="" />
               </span>
+              <NavItem  categoryisOpen={categoryisOpen} />
             </button>
           </div>
           <ul className="flex justify-center items-center">

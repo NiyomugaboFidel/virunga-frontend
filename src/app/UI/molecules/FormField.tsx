@@ -29,7 +29,7 @@ const FormField: React.FC<InputField> = ({
 
   return (
     <div
-      className={`${className} px-[16px] gap-[10px] py-[9px] rounded-[8px] border border-Gary-300  flex items-center justify-center transition-all ease-in-out duration-500 `}
+      className={`${className} min-w-[260px] px-[16px] gap-[10px] py-[9px] rounded-[8px] border border-Gary-300  flex items-center justify-center transition-all ease-in-out duration-500 `}
     > 
          <Icon
           iconName={'input-l.svg'}
