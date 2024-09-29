@@ -19,6 +19,7 @@ const Input: React.FC<Input> = ({ type, name, value, id, onChange,placeholder })
       value={value}
       onChange={onChange}
       placeholder={placeholder}
+      required
       
     />
   );

@@ -25,7 +25,7 @@ const Button: React.FC<ButtonProps> = ({
       className={`${className} bg-[#F55266]  text-[#FFFFFF] leading-[24px] text-[16px] font-[500] flex  gap-[8px] px-[24px] py-[12px] rounded-[8px] border-none `}
       type={type}
     >
-      <span className="h-full flex items-center justify-center text-center">
+      <span className="w-full h-full flex items-center justify-center text-center">
         {" "}
         {label}
       </span>

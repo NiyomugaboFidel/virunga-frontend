@@ -129,7 +129,7 @@ const Header: React.FC = () => {
           <Icon iconTag={svg.search} />
           <Icon iconTag={svg.cart} className="bg-Gary-700 hover:bg-Gary-300" />
         </div>
-       <div className={`${isNavOpen ? 'left-[-800%]' : 'left-[0%]'} w-full top-[64px] text-start bg-primaryColor-light h-full min-h-[300px] absolute  transition-all duration-500 ease-in-out flex flex-col lg:hidden `}>
+       <div className={`${!isNavOpen ? 'left-[-800%]' : 'left-[0%]'} z-20 w-full top-[64px] text-start bg-primaryColor-light h-full min-h-[300px] absolute  transition-all duration-500 ease-in-out flex flex-col lg:hidden `}>
        <div className="">
             <button className="pl-[24px] pr-[16px] bg-Gary-700 flex justify-between items-center gap-[10px] ">
               <div className="flex items-center justify-center">
