@@ -1,28 +1,52 @@
-import { ChangeEvent } from "react";
+import React, { forwardRef } from 'react';
 
-interface Input {
-  type: string;
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  type?: string;
   name?: string;
-  value: string;
+  placeholder?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  autoFocus?: boolean;
+  autoComplete?: string;
+  registeration?:any
+  isLoading?: boolean;
+  disabled?: boolean;
+  value?: string | any;
   id?: string;
-  placeholder?:string
-  onChange: (e:ChangeEvent<HTMLInputElement>)=> void 
 }
 
-const Input: React.FC<Input> = ({ type, name, value, id, onChange,placeholder }) => {
+const Input = forwardRef<HTMLInputElement, InputProps>(({
+  type = 'text',
+  id,
+  name,
+  value,
+  onChange,
+  disabled,
+  isLoading,
+  autoFocus,
+  autoComplete,
+  placeholder,
+  registeration,
+  ...props
+}, ref) => {
   return (
     <input
+      id={id}
       type={type}
       className="border-none outline-none bg-transparent w-full"
-      id={id}
       name={name}
+      disabled={disabled || isLoading || false}
+      placeholder={placeholder}
+      autoComplete={'off'}
+      autoFocus={autoFocus}
+      ref={ref}
+      {...registeration}
       value={value}
       onChange={onChange}
-      placeholder={placeholder}
-      required
-      
+      {...props}
     />
   );
-};
+});
+
+Input.displayName = 'Input'; // To avoid issues with anonymous components in dev tools
 
 export default Input;

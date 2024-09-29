@@ -4,19 +4,31 @@ import Logo from "../atoms/Logo";
 import FormField from "../molecules/FormField";
 import Input from "../atoms/Input";
 import Button from "../atoms/Button";
-import { ChangeEvent, useState } from "react";
+import { useForm, FormProvider } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { SignupValidationSchema } from "@/app/validations/SignupValidation";
+import useSignup from "@/app/hooks/useSignup";
+import { useRouter } from "next/navigation";
+
 
 const SignUp: React.FC = () => {
-  const [inputs, setInputs] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    passwold: "",
+  const router = useRouter();
+  const {handleSignup, mutation} = useSignup()
+  const methods = useForm({
+    resolver: yupResolver(SignupValidationSchema),
   });
-  const handleSubmit = (e:ChangeEvent<HTMLFormElement>)=>{
-    e.preventDefault()
-    console.log(inputs);
+
+  const onSubmit = (data: any) => {
+   handleSignup(data);
+   methods.reset();
+   const token = localStorage.getItem('token')
+   if(mutation.isSuccess &&  token){
+     router.push('/');
+   }else{
+     return
    }
+  };
+
   return (
     <div className="w-full h-full min-h-[95vh]">
       <div className="w-full h-full min-h-[95vh] gap-5 flex flex-col items-center justify-between lg:pl-[50px]  xl:pl-[200px] 2xl:pl-[316px] lg:pr-[50px] ">
@@ -35,74 +47,93 @@ const SignUp: React.FC = () => {
               </Link>
             </p>
           </div>
-          <form onSubmit={handleSubmit} className="w-full flex flex-col gap-[24px] ">
-            <FormField
-              type="text"
-              iconName="input-v.svg"
-              onChange={(e) =>
-                setInputs({ ...inputs, firstName: e.target.value })
-              }
-              value={inputs.firstName}
-              placeholder="FirstName"
-              className="w-full"
-            />
-            <FormField
-              type="text"
-              iconName="input-v.svg"
-              className="w-full"
-              placeholder="LastName"
-              onChange={(e) =>
-                setInputs({ ...inputs, lastName: e.target.value })
-              }
-              value={inputs.lastName}
-            />
-            <FormField
-              type="email"
-              iconName="input-v.svg"
-              onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
-              value={inputs.email}
-              className="w-full"
-              placeholder="Email"
-            />
-            <FormField
-              type="password"
-              iconName="input-v.svg"
-              className="w-full"
-              onChange={(e) =>
-                setInputs({ ...inputs, passwold: e.target.value })
-              }
-              value={inputs.passwold}
-              placeholder="Password"
-            />
-            <div className=" w-full  flex  flex-col gap-[10px]">
-              <span className="flex items-center justify-center gap-2">
-                <span className="flex  items-center justify-center">
-                  <Input type="checkbox" onChange={() => {}} value="" />
-                </span>
-                <p className="w-full text-start text-bodyDefault dark:text-[#CAD0D9]">
-                  Save the password
-                </p>
-              </span>
-              <span className="flex items-start justify-start gap-2">
-                <span className="flex  items-center justify-center">
-                  <Input type="checkbox" onChange={() => {}} value="" />
-                </span>
-                <p className="w-full text-start text-bodyDefault dark:text-[#CAD0D9]">
-                  I would like to receive personalized commercial offers from
-                  Cartzilla by email.
-                </p>
-              </span>
-            </div>
-            <div className="w-full">
-              <Button
-                label="Create an account"
-                onClick={() => {}}
-                type="submit"
-                className=" w-full  text-center"
+          <FormProvider {...methods}>
+            <form
+              onSubmit={methods.handleSubmit(onSubmit)}
+              className="w-full flex flex-col gap-[24px] "
+            >
+              <FormField
+                iconName={
+                  methods.formState.errors.firstName
+                    ? "input-x.svg"
+                    : "input-v.svg"
+                }
+                placeholder="FirstName"
+                name="firstName"
+                id="firstName"
+                registeration={methods.register("firstName")}
+                errorMessage={methods.formState.errors.firstName?.message}
               />
-            </div>
-          </form>
-
+              <FormField
+                iconName={
+                  methods.formState.errors.lastName
+                    ? "input-x.svg"
+                    : "input-v.svg"
+                }
+                placeholder="LastName"
+                name="lastName"
+                id="lastName"
+                registeration={methods.register("lastName")}
+                errorMessage={methods.formState.errors.lastName?.message}
+              />
+              <FormField
+                iconName={
+                  methods.formState.errors.email ? "input-x.svg" : "input-v.svg"
+                }
+                placeholder="Email"
+                name="email"
+                id="email"
+                registeration={methods.register("email")}
+                errorMessage={methods.formState.errors.email?.message}
+              />
+              <FormField
+                iconName={
+                  methods.formState.errors.password
+                    ? "input-x.svg"
+                    : "input-v.svg"
+                }
+                placeholder="password"
+                name="password"
+                id="password"
+                type="password"
+                registeration={methods.register("password")}
+                errorMessage={methods.formState.errors.password?.message}
+              />
+              <div className=" w-full  flex  flex-col gap-[10px]">
+                <span className="flex items-center justify-center gap-2">
+                  <span className="flex  items-center justify-center">
+                    <Input type="checkbox" onChange={() => {}} value="" />
+                  </span>
+                  <p className="w-full text-start text-bodyDefault dark:text-[#CAD0D9]">
+                    Save the password
+                  </p>
+                </span>
+                <span className="flex items-start justify-start gap-2">
+                  <span className="flex  items-center justify-center">
+                    <Input
+                      name=""
+                      type="checkbox"
+                      onChange={() => {}}
+                      value=""
+                    />
+                  </span>
+                  <p className="w-full text-start text-bodyDefault dark:text-[#CAD0D9]">
+                    I would like to receive personalized commercial offers from
+                    Cartzilla by email.
+                  </p>
+                </span>
+              </div>
+              <div className="w-full">
+                <Button
+                  label={mutation.isPending ? "Create an account...": "Create an account"}
+                  type="submit"
+                  className=" w-full  text-center"
+                  isLoading={mutation.isPending}
+                  disabled={mutation.isPending}
+                />
+              </div>
+            </form>
+          </FormProvider>
           <div className=" w-full flex flex-col gap-[5px] 2xl:gap-[10px] justify-center ">
             <div className=" w-full flex gap-2">
               <span className="w-2/3 flex items-center justify-center  ">
@@ -116,15 +147,14 @@ const SignUp: React.FC = () => {
               </span>
             </div>
             <div className=" w-full flex md:flex-row flex-col justify-center items-center gap-[16px] dark:text-white">
-              <button className=" w-full border dark:border-Gary-700 px-[24px] py-[12px] rounded-[8px] dark:text-white bg-white text-[16px] dark:bg-primaryColor-dark leading-[24px] font-[500] text-Gary-700">
-                Google
-              </button>
-              <button className="w-full border dark:border-Gary-700 px-[24px] py-[12px] rounded-[8px] dark:text-white bg-white text-[16px] dark:bg-primaryColor-dark leading-[24px] font-[500] text-Gary-700">
-                Facebook
-              </button>
-              <button className=" w-full border dark:border-Gary-700 px-[24px] py-[12px] rounded-[8px] dark:text-white bg-white dark:bg-primaryColor-dark text-[16px] leading-[24px] font-[500] text-Gary-700">
-                Apple
-              </button>
+              {["Google", "Facebook", "Apple"].map((item, index) => (
+                <button
+                  key={index}
+                  className=" w-full border dark:border-Gary-700 px-[24px] py-[12px] rounded-[8px] dark:text-white bg-white dark:bg-primaryColor-dark text-[16px] leading-[24px] font-[500] text-Gary-700"
+                >
+                  {item}
+                </button>
+              ))}
             </div>
           </div>
         </div>
