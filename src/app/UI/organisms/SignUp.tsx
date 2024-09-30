@@ -30,8 +30,8 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-full min-h-[95vh]">
-      <div className="w-full h-full min-h-[95vh] gap-5 flex flex-col items-center justify-between lg:pl-[50px]  xl:pl-[200px] 2xl:pl-[316px] lg:pr-[50px] ">
+    <div className="w-full h-full ">
+      <div className="w-full h-full  gap-5 flex flex-col items-center justify-between lg:pl-[50px]  xl:pl-[200px] 2xl:pl-[316px] lg:pr-[50px] ">
         <div className="w-full ">
           <Logo textDark="dark:text-[#ffffff]" textLight="text-[#ffffff]" />
         </div>

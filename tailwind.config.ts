@@ -62,7 +62,11 @@ const config: Config = {
           300: '#FF9DA3',
           200: '#FFCDDO',
           100: '#FFECED',
-        }
+        },
+        gradientStart: '#ACCBEE',
+        gradientEnd: '#E7F0FD',
+        'custom-dark-1': '#1B273A',
+        'custom-dark-2': '#1F2632',
         // Add more custom colors here
       },
       fontSize: {

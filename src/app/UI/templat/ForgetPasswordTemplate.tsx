@@ -1,15 +1,16 @@
 'use client'
 import svg from "@/app/data/svgIcon";
 import Icon from "../atoms/Icon";
-import Login from "../organisms/Login"
+import Forgetpassword from "../organisms/ForgetPassword";
+
 import { useDarkMode } from "@/app/context/DarkModeContext";
 
-const LoginFormTemplate = () => {
+const ForgetPasswordTemplate = () => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   return (
     <div className=" flex lg:flex-row flex-col-reverse justify-center items-center gap-3 p-[20px] lg:p-[10px]">
         <div className=" h-full min-h-[95vh] lg:w-1/2">
-            <Login />
+          <Forgetpassword />
         </div>
         <div className=" hidden  lg:w-1/2 h-full min-h-[95vh] dark:bg-gradient-to-l dark:from-custom-dark-1 dark:to-custom-dark-2 bg-gradient-to-l from-gradientStart to-gradientEnd rounded-[16px]  lg:flex items-start justify-end">
        <div className="bg-[url('/images/image-login.png')] bg-no-repeat   bg-center bg-contain w-full h-full min-h-[95vh]">
@@ -31,4 +32,4 @@ const LoginFormTemplate = () => {
   )
 }
 
-export default LoginFormTemplate
+export default ForgetPasswordTemplate

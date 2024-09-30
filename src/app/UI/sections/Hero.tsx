@@ -7,7 +7,7 @@ const Hero: React.FC = () => {
   return (
     <div className=" flex w-full pt-[24px]">
       <div className=" hidden lg:block lg:w-1/3"></div>
-      <div className=" relative dark:bg-[#1B273A] bg-[#ACCBEE] w-full h-full  lg:w-2/3 lg:h-[400px] 2xl:h-[522px] flex flex-col items-center justify-center rounded-[12px]">
+      <div className=" relative dark:bg-gradient-to-l dark:from-custom-dark-1 dark:to-custom-dark-2 bg-gradient-to-l from-gradientStart to-gradientEnd  dark:bg-[#1B273A] bg-[#ACCBEE] w-full h-full  lg:w-2/3 lg:h-[400px] 2xl:h-[522px] flex flex-col items-center justify-center rounded-[12px]">
         <div className="flex lg:flex-row flex-col items-center justify-center w-full h-full">
           <div className="lg:w-[351px] h-full flex flex-col gap-[40px] items-center lg:items-start pt-[40px] lg:pt-0 lg:pl-[40px] justify-center ">
             <p className="text-center lg:text-start font-[400] text-[16px] leading-[24px] py-[]">
