@@ -1,6 +1,8 @@
+"use client";
 import { useMutation } from "@tanstack/react-query";
 import api from "../lib/Axios";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface Signup {
   firstName: string;
@@ -17,6 +19,7 @@ async function signupUser(data: Signup) {
 }
 
 const useSignup = () => {
+  const router = useRouter();
   const mutation = useMutation({
     mutationFn: signupUser,
     onError: (error: any) => {
@@ -42,6 +45,7 @@ const useSignup = () => {
         toast.success( data.message || 'Sign Up successfully, check email for more.',{
           position:"top-right"
         })
+        router.push('/login')
       }
     },
   });
