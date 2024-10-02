@@ -1,4 +1,4 @@
-import ForgetPasswordTemplate from "../UI/templat/ForgetPasswordTemplate"
+import ForgetPasswordTemplate from "@/app/UI/templat/ForgetPasswordTemplate"
 
 const ForgetPasswordPage = () => {
   return (

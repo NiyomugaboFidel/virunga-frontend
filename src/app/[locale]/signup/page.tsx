@@ -1,5 +1,5 @@
 import React from 'react'
-import SignUpFormTemplate from '../UI/templat/SignUpFormTemplate'
+import SignUpFormTemplate from '@/app/UI/templat/SignUpFormTemplate'
 
 const SiginUpPage = () => {
   return (

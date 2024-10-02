@@ -8,6 +8,7 @@ import { useDarkMode } from "@/app/context/DarkModeContext";
 import { navrouter } from "@/app/data/Constant";
 import Link from "next/link";
 import NavItem from "../molecules/NavItem";
+import LocaleSwitcher from "@/app/components/local-switcher";
 
 
 const Header: React.FC = () => {
@@ -91,10 +92,7 @@ const Header: React.FC = () => {
           </ul>
           <div className="flex items-center gap-[8px] justify-center ">
             <div className="py-[12px] flex justify-center items-center gap-1">
-              <span>Eng </span>{" "}
-              <span>
-                <Icon iconTag={svg.dropdown} className="w-[8px] h-[4px]" />
-              </span>
+              <LocaleSwitcher />
             </div>
             <div className="py-[12px] flex justify-center items-center gap-1 ">
               <span>Usd($) </span>{" "}

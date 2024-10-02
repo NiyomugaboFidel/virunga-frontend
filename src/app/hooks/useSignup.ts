@@ -1,8 +1,8 @@
 "use client";
 import { useMutation } from "@tanstack/react-query";
-import api from "../lib/Axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import api from "../lib/Axios";
 
 interface Signup {
   firstName: string;

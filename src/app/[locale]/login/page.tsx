@@ -1,4 +1,5 @@
-import LoginFormTemplate from "../UI/templat/LoginFormTemplate"
+import LoginFormTemplate from "@/app/UI/templat/LoginFormTemplate"
+
 const LoginPage:React.FC = () => {
   return (
     <div className="w-full h-full">

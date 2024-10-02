@@ -10,3 +10,4 @@ export const LoginValidationSchema = yup.object().shape({
     .min(8, "Password must be 8 characters").max(8,"Password must be 8 characters" )
     .required("Password is required"),
 });
+

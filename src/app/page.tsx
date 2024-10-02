@@ -1,14 +1,7 @@
-import Header from "./UI/organisms/Header";
-import Hero from "./UI/sections/Hero";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+const RootPage = () => {
+  redirect("/en");
+};
 
-  return (
-    <>
-    <Header />
-    <main className="dark:bg-gray-900 bg-white min-h-screen  px-[20px]  md:px-[50px] xl:px-[100px]">
-    <Hero />  
-    </main>
-    </>
-  );
-}
+export default RootPage;

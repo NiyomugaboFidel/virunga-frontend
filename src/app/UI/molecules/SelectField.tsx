@@ -10,7 +10,7 @@ interface SelectData {
 interface Select {
   SelectList: SelectData[];
   value: string;
-  className: string;
+  className?: string;
   iconName?: string;
   iconTag?: ReactNode;
   onChange: (value: string) => void;
